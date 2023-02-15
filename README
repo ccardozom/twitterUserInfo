@@ -1,0 +1,91 @@
+Twitter User Info
+
+Con esta herramienta puedes analizar los usuarios y sus tweets asi como también puedes realizar una busqueda más avanzada filtrando por fechas o por palabras clave
+He intentado hacer lo mejor posible, por supuesto hay que reparar fallos y agregarle mas funcionalidades como pueden ser el analisis de imagenes y demás
+
+Utilizo la libreria Twint para obtener y analizar datos de la plataforma twitter. 
+
+La razón principal por la que he elegido esta libreria para la extracción de datos es porque no necesitamos utilizar la API de twitter, por lo que tampoco es necesario estar registrado para tener acceso a la información. Como he comentado anteriormente, todavia queda reparar los fallos en las llamadas que hace y entender varios metodos para ampliar las opciones que se pueden ir añadiendo.
+
+Antes de empezar debemos instalar la libreria.
+
+Instalación de Twint
+    git clone --depth=1 https://github.com/twintproject/twint.git
+    cd twint && pip3 install . -r requirements.txt
+    pip3 install twint
+
+Iniciar la herramienta
+
+    python3 twitterUserInfo.py
+
+Las opciones que podemos usar con esta herramienta:
+    1 - Consultar si existe el usuario
+    2 - Consultar todos los tweets del usuario
+    3 - Consultar ultimos X tweets (donde X es el limite de tweets que quieres ver)
+    4 - Consultar tweets por fecha
+    5 - Buscar una palabra en un tweet del usuario
+    6 - Exit
+
+1 - Consultar si existe el usuario
+    Esta opción te permite realizar una busqueda rápida para verificar si el nombre de usuario existe en Twitter.
+    Ejemplo:
+        elonmusk
+        42MadridFTef
+        jpedrerol
+        sanchezcastejon
+        .
+        .
+        .
+    si encuentra el nombre de usuario nos enseña un mensaje "El usuario jpedrerol existe"
+
+2 - Consultar todos los tweets del usuario
+    Esta opción carga todos los tweets del usuario y los vuelca a un archivo .json con el nombre en formato "tweet_<nombre_del_usuario>.json"
+    Ejemplo:
+        tweets_42MadridFTef.json 
+            1591122082267508736 2022-11-11 18:34:00 +0100 <42MadridFTef> #42MadridFTef y @STEMTalentGirl de Fundación ASTI colaboran para impulsar el talento femenino y las vocaciones STEM. ¡La #tecnología también es para mujeres!  https://t.co/miX6FX9Ix0
+            1591116548780920832 2022-11-11 18:12:01 +0100 <42MadridFTef> La Liga de las Mujeres de #42MadridFTef no ha querido perderse el evento de inauguración del 1r taller #TalentGirls junto a @StemTalentGirl.  https://t.co/WAfozy3yd6
+            1591114883302625285 2022-11-11 18:05:24 +0100 <42MadridFTef> 👩‍💻👩‍💻 Arranca el primer taller #TalentGirls para impulsar el talento femenino y las vocaciones STEM en #42MadridFtef junto a @STEMTalentGirl de la Fundación ASTI.  https://t.co/xJxQtCf9uK
+            1591062405051609088 2022-11-11 14:36:52 +0100 <42MadridFTef> Hoy hemos recibido la visita de @ftomillo a #42MadridFTef 🚀   Más de 30 jóvenes han conocido las instalaciones del campus y se han sumergido en la metodología. ¡Muchas gracias por la visita! 💥  https://t.co/76KMTD0eIa
+            .
+            .
+            .
+
+3 - Consultar ultimos X tweets (donde X es el limite de tweets que quieres ver)
+    Esta opción puede filtrar el resultado extrayendo solo la cantidad de tweets solicitada, siendo esta el valor X 
+    Ejemplo:
+    Ingrese el número de tweets que quieres capturar:
+    5
+    1620811029277216768 2023-02-01 16:47:17 +0100 <RSCruzRojaMad> Muchas gracias @odigo por vuestro apoyo y compromiso!!! con @CruzRojaMadrid  https://t.co/Fa0L2MU53t
+    1619660811408121856 2023-01-29 12:36:43 +0100 <RSCruzRojaMad> Muchas felicidades @MovistarEstu por estos 75 años!!!  https://t.co/TPpB8AFJ6F
+    1619660086384951297 2023-01-29 12:33:51 +0100 <RSCruzRojaMad> @MovistarEstu Felicidades por el 75 aniversario!!!
+    1613552829154697217 2023-01-12 16:05:47 +0100 <RSCruzRojaMad> Gran iniciativa de @Fun_Realmadrid !!!  https://t.co/GwTXSCYzly
+    1606322181012611087 2022-12-23 17:13:46 +0100 <RSCruzRojaMad> 👏👏👏 Encantados de contar siempre con vuestro apoyo!!!
+
+4 - Consultar tweets por fecha
+    Esta opción permite filtrar todos los tweets de una fecha especifica y generar un informe con ello.
+    Ejemplo:
+    usuario: HackbySecurity
+    Ingrese la fecha que quiere capturar los tweets
+    2023-02-06
+    1622550118602874882 2023-02-06 11:57:48 +0100 <HackbySecurity> Llega febrero con un 10% de #descuento con el código hbs10 y @chemaalonso nos lo cuenta en su #blog Tempos en @mypublicinbox,Masterclass de @pablogonzalezpe,@Seguridadjabali,@Gwalrock, @M_A_HbS @fernandez_jcar,#libros de @0xWORD y pases en @Singularity_Ex   https://t.co/brYGdHaNds
+
+5 - Buscar una palabra en un tweet del usuario
+    Esta opción te permite filtrar la captura de los tweets del usuario buscando una o varias palabras clave y generar un informe a partir de ellas.
+    Ejemplo: Podriamos saber entre miles de tweets de elonmusck solo lo que nos interesa
+    usuario: elonmusk
+    palabra clave: scary
+    1599128577068650498 2022-12-03 20:48:57 +0100 <elonmusk> @sama ChatGPT is scary good. We are not far from dangerously strong AI.
+    1531054728695644160 2022-05-30 01:27:47 +0100 <elonmusk> @EvaFoxU I dunno … that’s kind of a scary idea
+    1111825274885165056 2019-03-30 03:59:36 +0100 <elonmusk> @marshgre @NickBre58305797 @letsrebel1 @paul_rocchini @markbspiegel @Tesla Like the movie Us. Scary … but also empathetic.
+    1061536402221948928 2018-11-11 09:29:35 +0100 <elonmusk> @karaswisher Scary sign of times to come. It will get worse.
+
+
+6 - Exit
+    Esta opción te hace salir de la ejecución.
+
+PD: Existem muchas más posibles opciones pero he decidido centrarme en estas pocas para poder entregar algo medianamente funcional, visto está que hay fallos en varios puntos pero eso no quita que el esfuerzo y las horas que he dedicado para entender basicamente la libreria y sus metodos y opciones quedan reflejados. 
+Todo esto sería una base de partida pudiendo por ejemplo añadirle captura de imagenes de un tweet para luego realizar una implementacion de reconocimiento añadido con herramientas de analisis de imágenes por medio de IA
+
+Para cualquier aclaración, critica, valoración espero que se comuniquen conmigo al correo
+
+Bye
